@@ -61,6 +61,3 @@ def extract_reviews(file_path):
         reviews.append(review)
 
     return reviews
-
-file_path = 'softeng-306%3frecent%3dtrue\\index.html'
-print(extract_reviews(file_path))
