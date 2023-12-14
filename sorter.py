@@ -32,7 +32,6 @@ def get_files_by_course(path):
     directories_list = list_directories(path)
     files_by_course = {}
 
-    print("List of directories:")
     for directory in directories_list:
         course_name = process_course_name(remove_suffix(directory, "%3frecent%3dtrue"))
         

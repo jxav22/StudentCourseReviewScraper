@@ -23,8 +23,21 @@ for course, files in files_by_course.items():
         review_batch = extract_reviews(file)
         course_reviews.extend(review_batch)
 
+unique_reviews = {}
+for code, reviews_list in reviews.items():
+    unique_reviews.setdefault(code, [])
+    seen = set()
+    for review in reviews_list:
+        hashable_review = review.copy()
+        hashable_review['Content'] = ''.join(hashable_review['Content'])
+        review_tuple = tuple(hashable_review.items())
+
+        if review_tuple not in seen:
+            seen.add(review_tuple)
+            unique_reviews[code].append(review)
+
 # Convert dictionary to JSON string
-json_string = json.dumps(reviews)
+json_string = json.dumps(unique_reviews)
 
 # Write JSON string to a file
 with open('reviews.json', 'w') as file:
